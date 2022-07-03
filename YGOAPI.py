@@ -4,7 +4,7 @@ import json
 ##test response not final
 def main():
     response = requests.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")
-    print(response.json())
+    print(type(response))
 
 if __name__ == '__main__':
     main()
