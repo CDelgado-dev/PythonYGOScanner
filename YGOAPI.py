@@ -5,10 +5,14 @@ import json
 def main():
     card = input("Card: ")
     response = (requests.get(f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={card}")).json()  #My next idea is to grab all the cards info at the beginning again and let the user choose to lookup another card without grabbing data from the website
-    data = response['data'][0]
-    print(data['name'])
+    if 'data' in response.keys(): #Added check to see if we were sent data, ie if card doesn't exist. This will probably be removed when we switch back to grabbing all card data
+        data = response['data'][0]
+    else: 
+        data = None  
     #If a card exist in more than one set, prompt the user to choose a set, otherwise just display the one set and its price
-    if len(data['card_sets']) > 1:
+    if not data:
+        return
+    elif len(data['card_sets']) > 1:
         print("This card has more than one set, you can select which set using the leading number (ie 00)\nor with the set code. Otherwise just hit Enter to see all")
         setList = data['card_sets']
 
@@ -22,7 +26,7 @@ def main():
                 print(f"{cardSet}")
     else:
         cardSet = data['card_sets'][0]
-        print(f"Set Name: {cardSet['set_name']} Set Code: {cardSet['set_code']} Set Price: {cardSet['set_price']}")
+        print(f"Set Name: {cardSet['set_name']} Set Price: {cardSet['set_price']} Set Code: {cardSet['set_code']} Set Rarity: {cardSet['set_rarity']}")
 
     #for x in data:
     #    print(x['name'])
