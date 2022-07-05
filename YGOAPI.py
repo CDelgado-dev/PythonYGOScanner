@@ -18,7 +18,7 @@ def main():
 *set code (ID under card's picture)""")
     while True:   #Start infinite loop, that way script only needs to be started once and the website isn't spammed with too many requests
         card = input("Card or Set Code: ").lower().strip()   #ask user what card they want to lookup
-        cardsFound = 0  #used to tell the user if there search term didn't match anything
+        cardsFound = 0  #used to tell the user if their search term didn't match anything
         if setCodeRegex.match(card):  #if the search term looks like a set code, search for that instead
             for cardDict in data:
                 if 'card_sets' in cardDict.keys():

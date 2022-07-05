@@ -1,5 +1,5 @@
 # PythonYGOScanner
-Scans Yu-Gi-Oh cards and gets price info using python
+Scans Yu-Gi-Oh cards and gets price info using Python
 
 Requires Python module "requests" to be installed
 
