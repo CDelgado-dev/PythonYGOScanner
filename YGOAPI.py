@@ -2,7 +2,7 @@ import requests
 import json
 import re
 
-setCodeRegex = re.compile('[a-z0-9]{3,5}-[a-z0-9]{3,5}')
+setCodeRegex = re.compile('^[a-z0-9]{3,4}-[a-z0-9]{3,5}$')
 
 ##test response not final
 def main():
