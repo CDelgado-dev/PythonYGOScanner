@@ -14,7 +14,7 @@ def main():
 *Searches for card and displays their price
 *using data provided by ygoprodeck.com
 *The script can use the card name or
-*set code (ID under card's picture )
+*set code (ID under card's picture)
 Search is case insensitive for both Set Code
 and Card Name search. For example, both
 "Blue-Eye White Dragon" and "blue-eyes white dragon"
