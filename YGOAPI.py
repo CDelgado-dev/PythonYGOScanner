@@ -1,16 +1,16 @@
 import requests
 import re
+import sys
 
 setCodeRegex = re.compile('^[a-z0-9]{3,4}-[a-z0-9]{3,5}$')
 
-##test response not final
 def main():
     
-    #response = (requests.get(f"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={card}")).json()  #My next idea is to grab all the cards info at the beginning again and let the user choose to lookup another card without grabbing data from the website
     response = (requests.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")).json()
     data = response['data']  #The data variable is a list of dictionaries from ygoprodeck.com...
     #Each dictionary is for one card name, with card varients getting data in the set they came in under the 'card_sets' key
-    print("""-=Yu-Gi-Oh Card Scanner=-
+    if len(sys.argv) == 1:  #if the user passed a card, assume they already know the instructions and dont print them
+        print("""-=Yu-Gi-Oh Card Scanner=-
 *Searches for card and displays their price
 *using data provided by ygoprodeck.com
 *The script can use the card name or
@@ -20,13 +20,25 @@ and Card Name search. For example, both
 "Blue-Eye White Dragon" and "blue-eyes white dragon"
 will work.""")
     while True:   #Start infinite loop, that way script only needs to be started once and the website isn't spammed with too many requests
-        card = input("Card Name or Set Code: ").lower().strip()   #ask user what card they want to lookup      
+        card = getUserCard()   #ask user what card they want to lookup      
         if setCodeRegex.match(card):  #if the search term looks like a set code, search for that instead
             setCodeLookup(card,data)
         else:         # if the search term doesn't look like a set code, search for the card name normally
             cardLookup(card,data)
         if input("Lookup another card? [Y/n]: ").lower().strip().startswith('n'):
             break
+
+def getUserCard():
+    card = ''
+    if len(sys.argv) > 1:  #Checks if the user passed any arguments and also if we already checked the passed card
+        wordList = []
+        for _i in range(len(sys.argv) - 1):        #remove the last item from argv list and add it to the wordList - 
+            wordList.append(sys.argv.pop() + ' ')  #This will lower the length of argv to 1 and make the program act as if no card was passed from now on
+        wordList.reverse()  #the words were passed in reverse, so reverse them back
+        return ''.join(wordList).lower().strip()
+    else:
+        card = input("Card Name or Set Code: ").lower().strip() 
+        return card
 
 def setCodeLookup(card,data):
     setsFound = 0 #used for a failsafe if a card name accidently was detected as a set code
