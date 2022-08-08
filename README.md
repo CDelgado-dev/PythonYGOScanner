@@ -15,8 +15,18 @@ Can search for cards by name or set code
 
 `python3 YGOAPI.py`
 
+You can also pass the card or set code as a CLI argument
+
+For example: 
+
+`python3 YGOAPI.py Dark Magician`
+
+or, 
+
+`python3 YGOAPI.py BP01-EN017`
+
 ## Dependenancies
-On Debian/Ubuntu/Mint/Pop:
+On Debian/Ubuntu/Mint/Pop
 
 `sudo apt install python3-pip`
 
