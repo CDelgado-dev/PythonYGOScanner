@@ -21,6 +21,7 @@ On Debian/Ubuntu/Mint/Pop:
 `sudo apt install python3-pip`
 
 On RHEL/Fedora/CentOS
+
 `sudo dnf install python3-pip`
 
 Then:
