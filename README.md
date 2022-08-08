@@ -5,8 +5,6 @@ and data provided by ygoprodeck.com
 
 Requires Python module "requests" to be installed
 
-`pip3 install requests`
-
 Can search for cards by name or set code
 
 ## Downloading and running
@@ -16,3 +14,15 @@ Can search for cards by name or set code
 `cd PythonYGOScanner`
 
 `python3 YGOAPI.py`
+
+## Dependenancies
+On Debian/Ubuntu/Mint/Pop:
+
+`sudo apt install python3-pip`
+
+On RHEL/Fedora/CentOS
+`sudo dnf install python3-pip`
+
+Then:
+
+`pip3 install requests`
